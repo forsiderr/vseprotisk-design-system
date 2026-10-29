@@ -4,31 +4,31 @@ Upgates live-review proxy (auto-update).
 
 Run this on YOUR PC, point your browser at http://127.0.0.1:8124/. It:
   - fetches the real Upgates shop,
-  - injects the current override CSS (pulled live from GitHub, so when the
-    developer pushes a change it flows in automatically),
-  - AUTO-APPLIES the override without you refreshing: it re-polls the override
-    URL every few seconds and swaps the stylesheet in-place when changed.
+  - inlines the current override CSS as a <style> (correct on first paint),
+  - auto-updates: a small script re-fetches the override every N seconds and
+    swaps the same style node in place — push a change and it appears live,
+    no page refresh, no reload loop.
+
+Works on Windows and macOS/Linux. Python 3.8+ stdlib only.
 
 Usage (on your machine):
-    python3 serve_review.py
-    # then open http://127.0.0.1:8124/
+    python3 serve_review.py            # then open http://127.0.0.1:8124/
 
 Options:
     --port PORT          default 8124
+    --bind HOST          default 127.0.0.1
     --upstream URL       default https://vseprotisk.t2.upgates.shop
     --override-url URL   default https://raw.githubusercontent.com/forsiderr/
                               vseprotisk-design-system/main/override-carbon.css
-    --poll SECONDS       how often to re-fetch the override (default 3)
-    --bind HOST          default 127.0.0.1 (only reachable from this machine)
-
-Requires Python 3.8+ standard library only.
+    --poll SECONDS       re-fetch interval (default 3)
 """
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import socketserver
-import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from http import HTTPStatus
@@ -39,39 +39,35 @@ DEFAULT_OVERRIDE_URL = (
     "https://raw.githubusercontent.com/forsiderr/"
     "vseprotisk-design-system/main/override-carbon.css"
 )
-INJECT_TAG = '<link rel="stylesheet" href="/__override.css">'
 
-AUTO_REFRESH_JS = """
-<script>
-/* VSP auto-update: re-poll the injected override and swap in place. */
-(function () {
-  var url = location.protocol + '//' + location.host + '/__override.css';
-  var link = document.querySelector('link[href="' + url + '"]');
-  if (!link) { location.reload(); return; }
-  var i = 0;
-  setInterval(function () {
-    i++;
-    var probe = url + '?v=' + Date.now();
-    var nl = document.createElement('link');
-    nl.rel = 'stylesheet';
-    nl.href = probe;
-    nl.onload = function () {
-      if (this.getAttribute('data-swap')) { return; }
-      var old = document.querySelector('link[data-vsp-live]');
-      // remove the previous live copy, keep the base injected tag as fallback
-      var others = document.querySelectorAll('link[href^="' + url + '"]');
-      for (var k = 0; k < others.length; k++) {
-        if (!others[k].getAttribute('data-vsp-live')) continue;
-        others[k].parentNode.removeChild(others[k]);
-      }
-      nl.setAttribute('data-vsp-live', '1');
-      document.body.appendChild(nl);   // re-apply on top (layer wins anyway)
-    };
-    document.body.appendChild(nl);
-  }, parseInt('__POLL__', 10) * 1000);
-})();
-</script>
-"""
+# Auto-update script: re-polls the override and rewrites the same <style> node.
+# Never reloads the page; matches by data attribute (no link-href matching).
+AUTO_REFRESH_JS = (
+    "<script data-vsp-js>\n"
+    "(function(){\n"
+    "  var ENDPOINT = '/__override.css';\n"
+    "  var last = null;\n"
+    "  function apply(text){\n"
+    "    var el = document.querySelector('style[data-vsp-live]');\n"
+    "    if (!el){ el = document.createElement('style'); el.setAttribute('data-vsp-live','1'); document.head.appendChild(el); }\n"
+    "    if (el.textContent !== text) el.textContent = text;\n"
+    "  }\n"
+    "  function poll(){\n"
+    "    var x = new XMLHttpRequest();\n"
+    "    x.open('GET', ENDPOINT + '?c=' + Date.now(), true);\n"
+    "    x.onreadystatechange = function(){\n"
+    "      if (x.readyState === 4 && x.status === 200){\n"
+    "        var t = x.responseText;\n"
+    "        if (t !== last){ last = t; apply(t); }\n"
+    "      }\n"
+    "    };\n"
+    "    x.send();\n"
+    "  }\n"
+    "  poll();\n"
+    "  setInterval(poll, __POLL__ * 1000);\n"
+    "})();\n"
+    "</script>"
+)
 
 
 def build_handler(upstream: str, override_url: str, origin: str, poll: int):
@@ -82,63 +78,20 @@ def build_handler(upstream: str, override_url: str, origin: str, poll: int):
     fresh_js = AUTO_REFRESH_JS.replace("__POLL__", str(poll))
 
     class _Handler(BaseHTTPRequestHandler):
-        server_version = "VSPlive/0.2"
+        server_version = "VSPlive/0.3"
 
-        def log_message(self, format, *args):  # quiet
+        def log_message(self, format, *args):  # quiet by default
             pass
 
         def _fetch_bytes(self, url: str, timeout: int = 25) -> tuple[int, str, bytes]:
             req = urllib.request.Request(url, headers={"User-Agent": "VSPlive-review"})
             try:
                 with urllib.request.urlopen(req, timeout=timeout) as resp:
-                    body = resp.read()
-                    ctype = resp.headers.get("Content-Type") or ""
-                    return resp.status, ctype, body
-            except Exception as exc:  # network/upstream hiccup
-                return HTTPStatus.BAD_GATEWAY, "text/plain", str(exc).encode()
-
-        def _serve_override(self):
-            # always fetch the freshest override from the remote URL (no local copy)
-            status, ctype, data = self._fetch_bytes(override_url, timeout=20)
-            if status != 200:
-                self.send_response(HTTPStatus.BAD_GATEWAY)
-                self.send_header("Content-Type", "text/plain")
-                self.end_headers()
-                self.wfile.write(f"override fetch failed: {data!r}".encode())
-                return
-            self.send_response(200)
-            self.send_header("Content-Type", "text/css; charset=utf-8")
-            self.send_header("Cache-Control", "no-store")
-            self.send_header("Content-Length", str(len(data)))
-            self.end_headers()
-            self.wfile.write(data)
-
-        def do_GET(self):  # noqa: N802
-            parsed = urllib.parse.urlparse(self.path)
-            if parsed.path == "/__override.css":
-                self._serve_override()
-                return
-            path = self.path
-            if parsed.scheme or parsed.netloc:
-                path = parsed.path + ("?" + parsed.query if parsed.query else "")
-
-            status, ctype, body = self._fetch_bytes(scheme + "://" + upstream_netloc + path)
-            if "text/html" in ctype:
-                try:
-                    text = body.decode("utf-8", "replace")
-                except Exception:
-                    return self._write_raw(status, ctype, body)
-                text = re.sub(
-                    r'((?:href|src|action)=")(https?://)' + re.escape(upstream_netloc) + r'/',
-                    r"\1" + origin + r"/",
-                    text,
-                )
-                if "</head>" in text:
-                    text = text.replace("</head>", INJECT_TAG + fresh_js + "</head>", 1)
-                else:
-                    text = INJECT_TAG + text
-                body = text.encode("utf-8")
-            self._write_raw(status, ctype, body)
+                    return resp.status, resp.headers.get("Content-Type") or "", resp.read()
+            except urllib.error.HTTPError as e:
+                return e.code, "text/plain", str(e).encode()
+            except Exception as e:  # network hiccup
+                return HTTPStatus.BAD_GATEWAY, "text/plain", str(e).encode()
 
         def _write_raw(self, status, ctype, body):
             self.send_response(status)
@@ -149,10 +102,55 @@ def build_handler(upstream: str, override_url: str, origin: str, poll: int):
             self.end_headers()
             try:
                 self.wfile.write(body)
-            except BrokenPipeError:
-                pass
+            except (BrokenPipeError, ConnectionAbortedError, ConnectionResetError):
+                pass  # client (browser) closed the connection mid-write — expected on reload
 
-    return _Handler, fresh_js
+        def do_GET(self):  # noqa: N802
+            parsed = urllib.parse.urlparse(self.path)
+
+            if parsed.path == "/__override.css":
+                status, ctype, data = self._fetch_bytes(override_url, timeout=20)
+                if status == 200:
+                    self._write_raw(200, "text/css; charset=utf-8", data)
+                else:
+                    self._write_raw(HTTPStatus.BAD_GATEWAY, "text/plain",
+                                    b"override fetch failed")
+                return
+
+            path = self.path
+            if parsed.scheme or parsed.netloc:
+                path = parsed.path + ("?" + parsed.query if parsed.query else "")
+
+            status, ctype, body = self._fetch_bytes(scheme + "://" + upstream_netloc + path)
+
+            if "text/html" in ctype:
+                try:
+                    text = body.decode("utf-8", "replace")
+                except Exception:
+                    text = ""
+
+                # fetch the CURRENT override and inline it as <style data-vsp-live>
+                _, _ct, override = self._fetch_bytes(override_url, timeout=20)
+                style_inline = (
+                    "<style data-vsp-live>" + override.decode("utf-8", "replace") + "</style>"
+                )
+                inject = style_inline + fresh_js
+
+                # rewrite internal absolute links to the proxy origin
+                text = re.sub(
+                    r'((?:href|src|action)=")(https?://)' + re.escape(upstream_netloc) + r'/',
+                    r"\1" + origin + r"/",
+                    text,
+                )
+                if "</head>" in text:
+                    text = text.replace("</head>", inject + "</head>", 1)
+                else:
+                    text = inject + text
+                body = text.encode("utf-8")
+
+            self._write_raw(status, ctype, body)
+
+    return _Handler
 
 
 def main() -> int:
@@ -165,20 +163,20 @@ def main() -> int:
     args = ap.parse_args()
 
     origin = f"http://{args.bind}:{args.port}"
-    Handler, _ = build_handler(args.upstream, args.override_url, origin, args.poll)
+    Handler = build_handler(args.upstream, args.override_url, origin, args.poll)
 
     class Threaded(socketserver.ThreadingMixIn, HTTPServer):
         allow_reuse_address = True
 
     with Threaded((args.bind, args.port), Handler) as httpd:
-        print("=" * 60)
-        print("Running locally — no login needed.")
-        print(f"  open  http://{args.bind}:{args.port}/   (in your browser)")
+        print("=" * 62)
+        print("Running locally — open this in your browser:")
+        print(f"   http://{args.bind}:{args.port}/")
         print(f"  upstream : {args.upstream}")
         print(f"  override : {args.override_url}")
-        print(f"  auto-apply every {args.poll}s — push a change and watch it update")
+        print(f"  auto-update every {args.poll}s — when I push, it appears live")
         print("  Ctrl+C to stop")
-        print("=" * 60, flush=True)
+        print("=" * 62, flush=True)
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:

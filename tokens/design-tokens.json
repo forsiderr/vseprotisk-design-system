@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "name": "Všeprotisk design tokens",
+    "source": "Figma — vseprotisk brand",
+    "note": "Single source of truth. Edit these values, NOT dist/_variables.scss. Rebuild with: python build/generate.py",
+    "npm_title": "import tokens/design-tokens.json into your Figma plugin or design-token tooling"
+  },
+  "brand": {
+    "primary": "#364153",
+    "secondary": "#1447e6",
+    "conversion": "#e7000b"
+  },
+  "colors": {
+    "background": {
+      "pr": "#364153",
+      "se": "#1447e6",
+      "co": "#e7000b",
+      "de": "#F5F6F8",
+      "wh": "#ffffff"
+    },
+    "foreground_text": {
+      "pr": "#ffffff",
+      "se": "#ffffff",
+      "co": "#ffffff",
+      "wh": "#364153"
+    },
+    "text_separate": {
+      "pr": "#364153",
+      "prn": "#364153",
+      "gr": "#2e9e44",
+      "re": "#e7000b",
+      "ye": "#f0b100",
+      "cy": "#0ea5a8"
+    }
+  },
+  "spacing": {
+    "grid_rule": "4px baseline",
+    "scale": {
+      "0": "0",
+      "1": "0.25rem",
+      "2": "0.5rem",
+      "3": "1rem",
+      "4": "1.5rem",
+      "5": "2rem",
+      "6": "3rem",
+      "7": "4rem"
+    }
+  },
+  "type": {
+    "base_scale_rule": "px, fixed — disable elastic factor",
+    "sizes": {
+      "0": "0",
+      "1": "12px",
+      "2": "14px",
+      "3": "16px",
+      "4": "20px",
+      "5": "28px",
+      "6": "40px",
+      "7": "56px"
+    },
+    "scale_factor": 1
+  },
+  "radius": {
+    "0": "0",
+    "1": "8px",
+    "2": "16px",
+    "3": "24px",
+    "4": "50%"
+  },
+  "shadow": {
+    "0": "none",
+    "sm": "0 1px 3px rgba(0,0,0,.12)",
+    "md": "0 4px 12px rgba(0,0,0,.15)",
+    "lg": "0 16px 40px rgba(0,0,0,.18)"
+  }
+}

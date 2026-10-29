@@ -1,76 +1,49 @@
 {
   "meta": {
     "name": "Všeprotisk design tokens",
-    "source": "Figma — vseprotisk brand",
-    "note": "Single source of truth. Edit these values, NOT dist/_variables.scss. Rebuild with: python build/generate.py",
-    "npm_title": "import tokens/design-tokens.json into your Figma plugin or design-token tooling"
+    "source": "Penpot (design source of truth) → this file → --vsp-* custom properties",
+    "note": "These become the --vsp-* custom properties used by the override layer. Edit values here (or from the Penpot export), NOT in the override CSS. Override layer lives in @layer override { :root { --vsp-*: … } }.",
+    "status": "placeholder — fill from Penpot design-tokens export"
   },
-  "brand": {
-    "primary": "#364153",
-    "secondary": "#1447e6",
-    "conversion": "#e7000b"
-  },
-  "colors": {
-    "background": {
-      "pr": "#364153",
-      "se": "#1447e6",
-      "co": "#e7000b",
-      "de": "#F5F6F8",
-      "wh": "#ffffff"
-    },
-    "foreground_text": {
-      "pr": "#ffffff",
-      "se": "#ffffff",
-      "co": "#ffffff",
-      "wh": "#364153"
-    },
-    "text_separate": {
-      "pr": "#364153",
-      "prn": "#364153",
-      "gr": "#2e9e44",
-      "re": "#e7000b",
-      "ye": "#f0b100",
-      "cy": "#0ea5a8"
-    }
+  "color": {
+    "brand-primary": "#364153",
+    "brand-accent": "#1447e6",
+    "status-success": "#2e9e44",
+    "status-danger": "#e7000b",
+    "status-warning": "#f0b100",
+    "status-info": "#0ea5a8",
+    "surface": "#ffffff",
+    "surface-muted": "#F5F6F8"
   },
   "spacing": {
-    "grid_rule": "4px baseline",
-    "scale": {
-      "0": "0",
-      "1": "0.25rem",
-      "2": "0.5rem",
-      "3": "1rem",
-      "4": "1.5rem",
-      "5": "2rem",
-      "6": "3rem",
-      "7": "4rem"
-    }
+    "space-1": "4px",
+    "space-2": "8px",
+    "space-3": "16px",
+    "space-4": "24px",
+    "space-5": "32px",
+    "space-6": "48px",
+    "space-7": "64px"
   },
   "type": {
-    "base_scale_rule": "px, fixed — disable elastic factor",
-    "sizes": {
-      "0": "0",
-      "1": "12px",
-      "2": "14px",
-      "3": "16px",
-      "4": "20px",
-      "5": "28px",
-      "6": "40px",
-      "7": "56px"
-    },
-    "scale_factor": 1
+    "size-xs": "12px",
+    "size-sm": "14px",
+    "size-base": "16px",
+    "size-md": "20px",
+    "size-lg": "28px",
+    "size-xl": "40px",
+    "size-xxl": "56px",
+    "family-base": "system-ui, sans-serif"
   },
   "radius": {
-    "0": "0",
-    "1": "8px",
-    "2": "16px",
-    "3": "24px",
-    "4": "50%"
+    "radius-sm": "4px",
+    "radius-md": "8px",
+    "radius-lg": "16px",
+    "radius-xl": "24px",
+    "radius-full": "50%"
   },
   "shadow": {
-    "0": "none",
-    "sm": "0 1px 3px rgba(0,0,0,.12)",
-    "md": "0 4px 12px rgba(0,0,0,.15)",
-    "lg": "0 16px 40px rgba(0,0,0,.18)"
+    "shadow-sm": "0 1px 3px rgba(0,0,0,.12)",
+    "shadow-md": "0 4px 12px rgba(0,0,0,.15)",
+    "shadow-lg": "0 16px 40px rgba(0,0,0,.18)"
   }
 }

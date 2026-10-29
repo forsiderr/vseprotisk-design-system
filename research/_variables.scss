@@ -1,0 +1,1577 @@
+//
+// COLOR SYSTEM ****************************
+//
+
+$lightness-level:       6% !default;
+$text-saturation-max:   25% !default;
+$text-lightness-max:    25% !default;
+$text-lightness-level:  15% !default;
+
+// Base colors
+$color-white:            #fff !default;
+$color-green:            $brand-green !default;
+$color-red:              $brand-red !default;
+$color-yellow:           $brand-yellow !default;
+$color-cyan:             $brand-cyan !default;
+$color-black:            #000 !default;
+
+// Color helpers
+$primary-hue:            hue($brand-primary) !default;
+$primary-saturation:     saturation($brand-primary) !default;
+$primary-lightness:      lightness($brand-primary) !default;
+$secondary-hue:          hue($brand-secondary) !default;
+$secondary-saturation:   saturation($brand-secondary) !default;
+$secondary-lightness:    lightness($brand-secondary) !default;
+$conversion-hue:         hue($brand-conversion) !default;
+$conversion-saturation:  saturation($brand-conversion) !default;
+$conversion-lightness:   lightness($brand-conversion) !default;
+
+// Color helpers
+$primary-default-saturation:     designer-value($primary-saturation-designer, $primary-saturation) !default;
+$primary-default-lightness:      designer-value($primary-lightness-designer, 100%-$lightness-level) !default;
+$secondary-default-saturation:   designer-value($secondary-saturation-designer, $secondary-saturation) !default;
+$secondary-default-lightness:    designer-value($secondary-lightness-designer, $primary-default-lightness) !default;
+$conversion-default-saturation:  designer-value($conversion-saturation-designer, $conversion-saturation) !default;
+$conversion-default-lightness:   designer-value($conversion-lightness-designer, $primary-default-lightness) !default;
+
+// Background colors
+$color-bg-primary:               $brand-primary !default;
+$color-bg-primary-light:         lighten($color-bg-primary, $lightness-level) !default;
+$color-bg-primary-dark:          darken-max($color-bg-primary, $lightness-level) !default;
+$color-bg-secondary:             $brand-secondary !default;
+$color-bg-secondary-light:       lighten($color-bg-secondary, $lightness-level) !default;
+$color-bg-secondary-dark:        darken-max($color-bg-secondary, $lightness-level) !default;
+$color-bg-conversion:            $brand-conversion !default;
+$color-bg-conversion-light:      lighten($color-bg-conversion, $lightness-level) !default;
+$color-bg-conversion-dark:       darken-max($color-bg-conversion, $lightness-level) !default;
+
+// Foreground colors
+$color-fg-primary:               $brand-primary !default;
+$color-fg-primary-light:         lighten($color-fg-primary, $lightness-level) !default;
+$color-fg-primary-dark:          darken-max($color-fg-primary, $lightness-level) !default;
+$color-fg-secondary:             $brand-secondary !default;
+$color-fg-secondary-light:       lighten($color-fg-secondary, $lightness-level) !default;
+$color-fg-secondary-dark:        darken-max($color-fg-secondary, $lightness-level) !default;
+$color-fg-conversion:            $brand-conversion !default;
+$color-fg-conversion-light:      lighten($color-fg-conversion, $lightness-level) !default;
+$color-fg-conversion-dark:       darken-max($color-fg-conversion, $lightness-level) !default;
+
+// Default colors
+$color-default:                  hsl($primary-hue, $primary-default-saturation, $primary-default-lightness) !default;
+$color-default-light:            lighten($color-default, ($lightness-level * .5)) !default;
+$color-default-dark:             darken-max($color-default, $lightness-level) !default;
+
+// Default colors from secondary
+$color-default-s:                hsl($secondary-hue, $secondary-default-saturation, $secondary-default-lightness) !default;
+$color-default-s-light:          lighten($color-default-s, ($lightness-level * .5)) !default;
+$color-default-s-dark:           darken-max($color-default-s, $lightness-level) !default;
+
+// Default colors from conversion
+$color-default-c:                hsl($conversion-hue, $conversion-default-saturation, $conversion-default-lightness) !default;
+$color-default-c-light:          lighten($color-default-c, ($lightness-level * .5)) !default;
+$color-default-c-dark:           darken-max($color-default-c, $lightness-level) !default;
+
+// Text colors
+$color-text-primary:             hsl($primary-hue, saturation-max($brand-primary, $text-saturation-max), lightness-max($brand-primary, $text-lightness-max)) !default;
+$color-text-primary-light:       lighten($color-text-primary, $text-lightness-level) !default;
+$color-text-primary-dark:        darken-max($color-text-primary, $text-lightness-level) !default;
+$color-text-secondary:           hsl($secondary-hue, $secondary-saturation, lightness-max($brand-secondary, $text-lightness-max)) !default;
+$color-text-secondary-light:     lighten($color-text-secondary, $text-lightness-level) !default;
+$color-text-secondary-dark:      darken-max($color-text-secondary, $text-lightness-level) !default;
+$color-text-conversion:          hsl($conversion-hue, $conversion-saturation, lightness-max($brand-conversion, $text-lightness-max)) !default;
+$color-text-conversion-light:    lighten($color-text-conversion, $text-lightness-level) !default;
+$color-text-conversion-dark:     darken-max($color-text-conversion, $text-lightness-level) !default;
+$color-text-default-p:           $color-default !default;
+$color-text-default-s:           $color-default-s !default;
+$color-text-default-c:           $color-default-c !default;
+
+$designer-colors: (
+	"primary":          $brand-primary,
+	"secondary":        $brand-secondary,
+	"conversion":       $brand-conversion,
+	"primaryLight":     $color-default,
+	"secondaryLight":   $color-default-s,
+	"conversionLight":  $color-default-c,
+	"green":            $color-green,
+	"red":              $color-red,
+	"yellow":           $color-yellow,
+	"cyan":             $color-cyan,
+	"black":            $color-black,
+	"white":            $color-white
+);
+
+$designer-text-colors: (
+	"primaryN":         $brand-primary,
+	"primary":          $color-text-primary,
+	"secondaryN":       $brand-secondary,
+	"secondary":        $color-text-secondary,
+	"conversionN":      $brand-conversion,
+	"conversion":       $color-text-conversion,
+	"primaryLight":     $color-default-light,
+	"secondaryLight":   $color-default-s-light,
+	"conversionLight":  $color-default-c-light,
+	"green":            $color-green,
+	"red":              $color-red,
+	"yellow":           $color-yellow,
+	"cyan":             $color-cyan,
+	"black":            $color-black,
+	"white":            $color-white
+);
+
+$designer-class-text-colors: (
+	"prn":  map-get($designer-text-colors, "primaryN"),
+	"pr":   map-get($designer-text-colors, "primary"),
+	"sen":  map-get($designer-text-colors, "secondaryN"),
+	"se":   map-get($designer-text-colors, "secondary"),
+	"con":  map-get($designer-text-colors, "conversionN"),
+	"co":   map-get($designer-text-colors, "conversion"),
+	"de":   map-get($designer-text-colors, "primaryLight"),
+	"des":  map-get($designer-text-colors, "secondaryLight"),
+	"dec":  map-get($designer-text-colors, "conversionLight"),
+	"gr":   map-get($designer-text-colors, "green"),
+	"re":   map-get($designer-text-colors, "red"),
+	"ye":   map-get($designer-text-colors, "yellow"),
+	"cy":   map-get($designer-text-colors, "cyan"),
+	"bl":   map-get($designer-text-colors, "black"),
+	"wh":   map-get($designer-text-colors, "white")
+);
+
+// Action colors
+$color-required:  map-get($designer-text-colors, $brand-required) !default;
+$color-success:   map-get($designer-colors, $brand-success) !default;
+$color-danger:    map-get($designer-colors, $brand-danger) !default;
+$color-warning:   map-get($designer-colors, $brand-warning) !default;
+$color-info:      map-get($designer-colors, $brand-info) !default;
+
+// Other colors
+$color-facebook-bg:            #4267b2 !default;
+$color-facebook-text:          #fff !default;
+$color-facebook-border-width:  0 !default;
+$color-facebook-border-color:  unset !default;
+$color-google-bg:              #fff !default;
+$color-google-text:            #1f1f1f !default;
+$color-google-border-width:    1px !default;
+$color-google-border-color:    #747775 !default;
+$color-seznam-bg:              #CC0000 !default;
+$color-seznam-text:            #fff !default;
+$color-seznam-border-width:    0 !default;
+$color-seznam-border-color:    unset !default;
+
+// Lighten amount, if element is not visible enough on the dark background
+$color-diff-lighten:             25% !default;
+
+// Set a specific jump point for requesting color jumps
+$color-theme-interval:           8% !default;
+
+// The yiq lightness value that determines when the lightness of color changes from "dark" to "light"
+$yiq-contrasted-threshold:       200 !default;
+
+$yiq-text-light:                 $color-white !default;
+$yiq-text-dark:                  $color-text-primary !default;
+
+// Base background and text colors .bg-xxx
+$colors-bg: (
+	"pr":   $color-bg-primary,
+	"se":   $color-bg-secondary,
+	"co":   $color-bg-conversion,
+	"de":   $color-default,
+	"des":  $color-default-s,
+	"dec":  $color-default-c,
+	"gr":   $color-green,
+	"re":   $color-red,
+	"ye":   $color-warning,
+	"cy":   $color-cyan,
+	"bl":   $color-black,
+	"wh":   $color-white,
+) !default;
+
+$color-bg-primary-secondary-diff:  color-diff($color-bg-primary, $color-bg-secondary, $yiq-contrasted-threshold) !default;
+
+$colors-text: (
+	"pr":   map-get($designer-text-colors, $brand-primary-text),
+	"se":   map-get($designer-text-colors, $brand-secondary-text),
+	"co":   map-get($designer-text-colors, $brand-conversion-text),
+	"de":   map-get($designer-text-colors, $brand-primary-light-text),
+	"des":  map-get($designer-text-colors, $brand-secondary-light-text),
+	"dec":  map-get($designer-text-colors, $brand-conversion-light-text),
+	"gr":   map-get($designer-text-colors, $brand-green-text),
+	"re":   map-get($designer-text-colors, $brand-red-text),
+	"ye":   map-get($designer-text-colors, $brand-yellow-text),
+	"cy":   map-get($designer-text-colors, $brand-cyan-text),
+	"wh":   map-get($designer-text-colors, $brand-white-text),
+	"bl":   map-get($designer-text-colors, $brand-black-text)
+) !default;
+
+$colors-fg: (
+	"pr":   $color-fg-primary,
+	"se":   $color-fg-secondary,
+	"co":   $color-fg-conversion,
+	"de":   null,
+	"des":  null,
+	"dec":  null,
+	"wh":   null
+) !default;
+
+$colors-fg-complete: (
+	"pr":   $color-fg-primary,
+	"se":   $color-fg-secondary,
+	"co":   $color-fg-conversion,
+	"de":   $color-default,
+	"des":  $color-default-s,
+	"dec":  $color-default-c,
+	"gr":   $color-green,
+	"re":   $color-red,
+	"ye":   $color-warning,
+	"cy":   $color-cyan,
+	"bl":   $color-black,
+	"wh":   $color-white
+) !default;
+
+$colors-fg-text: (
+	"pr":   $color-white,
+	"se":   $color-white,
+	"co":   $color-white,
+	"de":   $color-text-primary,
+	"des":  $color-text-secondary,
+	"dec":  $color-text-conversion,
+	"wh":   $color-text-primary
+) !default;
+
+// Section colors .b.bg-xxx
+$colors-section: (
+	"pr":   map-get($colors-bg, "pr"),
+	"se":   map-get($colors-bg, "se"),
+	"co":   map-get($colors-bg, "co"),
+	"de":   map-get($colors-bg, "de"),
+	"des":  map-get($colors-bg, "des"),
+	"dec":  map-get($colors-bg, "dec"),
+	"wh":   map-get($colors-bg, "wh")
+) !default;
+
+// Text colors (for colors without background effects) .c-xxx
+$colors-text-separate: (
+	"pr":   map-get($designer-text-colors, $brand-primary-light-text),
+	"prn":  $brand-primary,
+	"se":   map-get($designer-text-colors, $brand-secondary-light-text),
+	"sen":  $brand-secondary,
+	"co":   map-get($designer-text-colors, $brand-conversion-light-text),
+	"con":  $brand-conversion,
+	"de":   map-get($designer-text-colors, $brand-primary-text),
+	"des":  map-get($designer-text-colors, $brand-secondary-text),
+	"dec":  map-get($designer-text-colors, $brand-conversion-text),
+	"mu":   null,
+	"inh":  inherit,
+	"gr":   $color-green,
+	"re":   $color-red,
+	"ye":   $color-warning,
+	"cy":   $color-cyan,
+	"bl":   $color-black,
+	"wh":   $color-white
+) !default;
+
+// Text muted (for unimportant texts) .b.bg-xxx .c-mu
+$colors-text-muted-opacity: .6 !default;
+$text-muted-color-base: rgba($color-white, $colors-text-muted-opacity) !default;
+
+$colors-text-muted: (
+	"pr":   rgba(map-get($colors-text, "pr"), $colors-text-muted-opacity),
+	"se":   rgba(map-get($colors-text, "se"), $colors-text-muted-opacity),
+	"co":   rgba(map-get($colors-text, "co"), $colors-text-muted-opacity),
+	"gr":   rgba(map-get($colors-text, "gr"), $colors-text-muted-opacity),
+	"re":   rgba(map-get($colors-text, "re"), $colors-text-muted-opacity),
+	"ye":   rgba(map-get($colors-text, "ye"), $colors-text-muted-opacity),
+	"cy":   rgba(map-get($colors-text, "cy"), $colors-text-muted-opacity),
+	"de":   rgba(map-get($colors-text, "de"), $colors-text-muted-opacity),
+	"des":  rgba(map-get($colors-text, "des"), $colors-text-muted-opacity),
+	"dec":  rgba(map-get($colors-text, "dec"), $colors-text-muted-opacity),
+	"bl":   rgba(map-get($colors-text, "bl"), $colors-text-muted-opacity),
+	"wh":   rgba(map-get($colors-text, "wh"), $colors-text-muted-opacity)
+) !default;
+
+// Links .b.bg-xxx a
+$link-decoration:             none !default;
+$link-hover-decoration:       underline !default;
+$link-texts-decoration:       underline !default;
+$link-text-hover-decoration:  none !default;
+$link-hover-bg:               rgba($color-bg-primary-dark, .075) !default;
+$link-hover-bg-dark:          rgba($color-black, .2) !default;
+$link-cursor:                 pointer !default;
+$link-underline-offset:       .2em !default;
+
+$colors-link-text: (
+	"pr":   map-get($designer-text-colors, $brand-primary-link),
+	"se":   map-get($designer-text-colors, $brand-secondary-link),
+	"co":   map-get($designer-text-colors, $brand-conversion-link),
+	"de":   map-get($designer-text-colors, $brand-primary-light-link),
+	"des":  map-get($designer-text-colors, $brand-secondary-light-link),
+	"dec":  map-get($designer-text-colors, $brand-conversion-light-link),
+	"wh":   map-get($designer-text-colors, $brand-white-link)
+) !default;
+
+$colors-link-text-hover: (
+	"pr":   darken-max(map-get($colors-link-text, "pr"), $text-lightness-level),
+	"se":   darken-max(map-get($colors-link-text, "se"), $text-lightness-level),
+	"co":   darken-max(map-get($colors-link-text, "co"), $text-lightness-level),
+	"de":   darken-max(map-get($colors-link-text, "de"), $text-lightness-level),
+	"des":  darken-max(map-get($colors-link-text, "des"), $text-lightness-level),
+	"dec":  darken-max(map-get($colors-link-text, "dec"), $text-lightness-level),
+	"wh":   darken-max(map-get($colors-link-text, "wh"), $text-lightness-level)
+) !default;
+
+// Disabled elements .disabled
+$disabled-opacity: .5 !default;
+
+//
+// BASE ****************************
+//
+
+// Z-index .zin-xxx
+$z-indexes: (
+	"n10":  -10,
+	"n1":   -1,
+	"un":   unset,
+	"0":    0,
+	"1":    1,
+	"2":    2,
+	"3":    3,
+	"4":    4,
+	"5":    5,
+	"6":    6,
+	"7":    7,
+	"8":    8,
+	"9":    9,
+	"10":   10,
+	"20":   20,
+	"30":   30,
+	"40":   40,
+	"50":   50
+) !default;
+
+$zindex-dropdown:        1000 !default;
+$zindex-fixed:           1010 !default;
+$zindex-tooltip:         1020 !default;
+$zindex-popover:         1030 !default;
+$zindex-overlay:         1040 !default;
+$zindex-sidebar:         1050 !default;
+$zindex-modal-backdrop:  1060 !default;
+$zindex-modal:           1070 !default;
+$zindex-lightbox:        1080 !default;
+
+// Scrollbar width
+$scroll-bar-width: 15px !default;
+
+// Body body
+$body-bg:        map-get($colors-bg, "wh") !default;
+$body-color:     map-get($colors-text-separate, "pr") !default;
+
+// Column sizes .column
+$column-width:            25vw !default;
+$column-max-width:        300px !default;
+$column-max-width-md:     320px !default;
+$column-max-width-lg:     430px !default;
+$column-sticky-position:  sticky !default;
+
+//
+// SIZING ****************************
+//
+
+// Min width .min-w-xxx (responsive)
+$min-width-sizes: (
+	"0":  0,
+	"1":  14rem,
+	"2":  24rem,
+	"3":  34rem,
+	"4":  54rem
+) !default;
+
+// Max width .max-w-xxx (responsive)
+$max-width-sizes: (
+	"xxs":    300px,
+	"xs":     $container-xs,
+	"sm":     $container-sm,
+	"md":     $container-md,
+	"lg":     $container-lg,
+	"xl":     $container-xl,
+	"xxl":    $container-xxl,
+	"fluid":  100%
+) !default;
+
+// Min height .min-h-xxx (responsive)
+$min-height-sizes: (
+	"0":   0,
+	"1":   3rem,
+	"2":   4.5rem,
+	"3":   8rem,
+	"4":   13em,
+	"5":   21rem,
+	"6":   33rem,
+	"7":   50rem,
+	"8":   295px,
+	"9":   345px,
+	"10":  395px,
+	"11":  50vh,
+	"12":  75vh,
+	"13":  100vh
+) !default;
+
+// Max height .max-h-xxx (responsive)
+$max-height-sizes: (
+	"0":      0,
+	"1":      1rem,
+	"2":      2rem,
+	"3":      4rem,
+	"4":      8rem,
+	"5":      16rem,
+	"6":      24rem,
+	"7":      32rem,
+	"8":      48rem,
+	"9":      64rem,
+	"fluid":  100%
+) !default;
+
+//
+// SPACERS ****************************
+//
+$section-y:  3.3334rem * 0.5 * $condensed !default;
+$spacers: (
+	"0":  0,
+	"1":  .33334rem,
+	"2":  .66667rem,
+	"3":  1rem,
+	"4":  1.3334rem,
+	"5":  2rem,
+	"6":  $section-y,
+	"7":  calc(#{$section-y} + #{map-get($min-height-sizes, "3")})
+) !default;
+
+$spacers-negative: (
+	"1":  -(map-get($spacers, "1")),
+	"2":  -(map-get($spacers, "2")),
+	"3":  -(map-get($spacers, "3")),
+	"4":  -(map-get($spacers, "4")),
+	"5":  -(map-get($spacers, "5")),
+	"6":  -(map-get($spacers, "6")),
+	"7":  calc(#{-$section-y} - #{map-get($min-height-sizes, "3")})
+) !default;
+
+$space-ico:     map-get($spacers, "1") !default;
+$space-ico-lg:  map-get($spacers, "2") !default;
+$gutters: $spacers !default;
+
+$gaps: (
+	"0": map-get($spacers, "0"),
+	"1": map-get($spacers, "1"),
+	"2": map-get($spacers, "2"),
+	"3": map-get($spacers, "3"),
+	"4": map-get($spacers, "4"),
+	"5": map-get($spacers, "5"),
+	"6": map-get($spacers, "6")
+) !default;
+
+// px
+$px: 15px !default;
+
+// Width, Height .w-xxx, .h-xxx (responsive)
+$sizes: (
+	"0":     0%,
+	"20":    20%,
+	"25":    25%,
+	"33":    33%,
+	"40":    40%,
+	"50":    50%,
+	"75":    75%,
+	"100":   100%,
+	"auto":  auto
+) !default;
+
+//
+// Components ****************************
+//
+
+// Background overlays .bov-xxx-o-xxx
+$bg-overlays: (
+	"bl":   '0,0,0',
+	"cy":   '26,38,56',
+	"re":   '56,26,26',
+	"gr":   '38,55,47',
+	"ye":   '120,89,42',
+	"wh":   '255,255,255'
+) !default;
+
+$bg-overlay-opacities: (
+	"5":    .05,
+	"10":   .1,
+	"20":   .2,
+	"40":   .4,
+	"60":   .6,
+	"80":   .8,
+	"100":  1
+) !default;
+
+// Background gradients .bgr-xxx
+$bg-gradient-default-direction:  180deg !default;
+$bg-gradient-size-md:            75% !default;
+$bg-gradient-size-lg:            100% !default;
+
+$bg-gradient-directions: (
+	"l1":   ( type: null, direction: 0deg, size: null ),
+	"l2":   ( type: null, direction: 45deg, size: null ),
+	"l3":   ( type: null, direction: 90deg, size: null ),
+	"l4":   ( type: null, direction: 135deg, size: null ),
+	"l5":   ( type: null, direction: null, size: null ),
+	"l6":   ( type: null, direction: 225deg, size: null ),
+	"l7":   ( type: null, direction: 270deg, size: null ),
+	"l8":   ( type: null, direction: 315deg, size: null ),
+	"r9":   ( type: 'radial', direction: circle, size: $bg-gradient-size-md),
+	"r10":  ( type: 'radial', direction: circle, size: null )
+) !default;
+
+// Background size .bsi-xxx (responsive)
+$background-sizes: (
+	"cov":   cover,
+	"cont":  contain,
+	"act":   initial,
+	"str":   100% 100%
+) !default;
+
+// Background positions .bpo-xxx (responsive)
+$background-positions: (
+	"c":   center,
+	"t":   top,
+	"b":   bottom,
+	"l":   left,
+	"r":   right,
+	"tl":  top left,
+	"bl":  bottom left,
+	"tr":  top right,
+	"br":  bottom right
+) !default;
+
+// Background repeats .bre-xxx (responsive)
+$background-repeats: (
+	"xy":  repeat,
+	"x":   repeat-x,
+	"y":   repeat-y,
+	"s":   space,
+	"r":   round,
+	"n":   no-repeat
+) !default;
+
+// Blends .blend-xxx (responsive)
+$blends: (
+	"0":   normal,
+	"1":   multiply,
+	"2":   screen,
+	"3":   overlay,
+	"4":   darken,
+	"5":   lighten,
+	"6":   color-dodge,
+	"7":   color-burn,
+	"8":   hard-light,
+	"9":   soft-light,
+	"10":  difference,
+	"11":  exclusion,
+	"12":  hue,
+	"13":  saturation,
+	"14":  color,
+	"15":  luminosity
+) !default;
+
+// Hues .fil-hu-xxx
+$hues: (
+	"0":    0deg,
+	"20":   20deg,
+	"40":   40deg,
+	"60":   60deg,
+	"80":   80deg,
+	"100":  100deg,
+	"120":  120deg,
+	"140":  140deg,
+	"160":  160deg,
+	"180":  180deg,
+	"200":  200deg,
+	"220":  220deg,
+	"240":  240deg,
+	"260":  260deg,
+	"280":  280deg,
+	"300":  300deg,
+	"320":  320deg,
+	"340":  340deg,
+	"350":  350deg
+) !default;
+
+// Saturation .fil-sa-xxx
+$saturations: (
+	"0":    0%, "20":   20%, "40":   40%, "60":   60%, "80":   80%,
+	"100":  100%, "120": 120%, "140":  140%, "160": 160%, "180":  180%, "200": 200%
+) !default;
+
+// Brightness .fil-br-xxx
+$brightnesses: (
+	"0":    0%, "20":   20%, "40":   40%, "60":   60%, "80":   80%,
+	"100":  100%, "120": 120%, "140":  140%, "160": 160%, "180":  180%, "200": 200%
+) !default;
+
+// Contrast .fil-co-xxx
+$contrasts: (
+	"0":    0%, "20":   20%, "40":   40%, "60":   60%, "80":   80%,
+	"100":  100%, "120": 120%, "140":  140%, "160": 160%, "180":  180%, "200": 200%
+) !default;
+
+// Invert .fil-in-xxx
+$inverts:  (
+	"0":    0%, "20":   20%, "40":   40%, "60":   60%, "80":   80%, "100": 100%
+) !default;
+
+// Sepia .fil-se-xxx
+$sepias:  (
+	"0":    0%, "20":   20%, "40":   40%, "60":   60%, "80":   80%, "100": 100%
+) !default;
+
+// Opacity .fil-op-xxx (responsive)
+$opacities: (
+	"0":    0%, "5":    5%, "10":   10%, "20":   20%, "40":   40%,
+	"60":   60%, "80":   80%, "100":  100%
+) !default;
+
+$blurs: (
+	"0":   0, "1":   1px, "3":   3px, "6":   6px, "10":  10px,
+	"20":  20px, "30":  30px, "40":  40px, "50":  50px
+) !default;
+
+// Visibility .vis-xxx (responsive)
+$visibilities: (
+	"h":  hidden,
+	"v":  visible
+) !default;
+
+// Line height .lh-xxx (responsive)
+$line-height-sizes: (
+	"0":    0,
+	"xs":   $line-height-base * .75,
+	"sm":   $line-height-base * 0.8125,
+	"md":   $line-height-base * .9,
+	"lg":   $line-height-base,
+	"xl":   $line-height-base * 1.09375,
+	"xxl":  $line-height-base * 1.25
+) !default;
+
+$line-height-heading:  map-get($line-height-sizes, "xs") !default;
+
+// Border .bo-xxx-xxx (responsive)
+$border-positions: (
+	"t":  "top",
+	"r":  "right",
+	"b":  "bottom",
+	"l":  "left"
+) !default;
+
+$border-sizes: (
+	"0":  0,
+	"1":  1px,
+	"2":  2px,
+	"d":  $border-size-base
+) !default;
+
+$border-sizes-reset: -$border-size-base !default;
+
+// .bos-
+$border-styles: (
+	"so":  "solid",
+	"da":  "dashed",
+	"do":  "dotted"
+) !default;
+
+// Border colors
+$border-contrast-ratio: .085 !default;
+$border-lightness-max:  50% !default;
+
+// Border radius .ra-xxx-xxx (responsive)
+$radius-positions: (
+	"tl":  "top-left",
+	"tr":  "top-right",
+	"br":  "bottom-right",
+	"bl":  "bottom-left"
+) !default;
+
+// .ras-xxx (responsive)
+$radius-sizes: (
+	"0":  0,
+	"1":  .25rem,
+	"2":  .45rem,
+	"3":  2rem,
+	"4":  50%
+) !default;
+
+$radius-rounded-max: 1.3em !default;
+
+// Outer .ou
+$outer-size: map-get($border-sizes, "2") !default;
+
+// Overlay
+$overlay-bg:         rgba($color-black, .5) !default;
+$overlay-bg-full:    0 0 0 200vw $overlay-bg !default;
+$overlay-bg-bottom:  0 200vw 0 calc(200vw - 1px) $overlay-bg !default;
+
+// Shadow .sh-xxx
+$shadows-left: (
+	"sm":   0, "md":   0, "lg":   0, "xl":   0, "xxl":  0
+) !default;
+
+$shadows-top: (
+	"sm":   .1rem, "md":   .25rem, "lg":   .625rem, "xl":   .625rem, "xxl":  0
+) !default;
+
+$shadows-blur: (
+	"sm":  .27rem, "md":  .6rem, "lg":  1.26rem, "xl":  1.26rem
+) !default;
+
+$shadows-color: (
+	"sm":  .05, "md":  .05, "lg":  .05, "xl":  .1
+) !default;
+
+$shadows-top-multiple:   2 !default;
+$shadows-blur-multiple:  3 !default;
+
+$shadows: (
+	"0":   none,
+	"sm":  map-get($shadows-left, "sm") map-get($shadows-top, "sm") shadow-blur(map-get($shadows-blur, "sm")) rgba($color-black, map-get($shadows-color, "sm")),
+	"md":  shadow-multiple(map-get($shadows-left, "md") map-get($shadows-top, "md") shadow-blur(map-get($shadows-blur, "md")) rgba($color-black, map-get($shadows-color, "md")), map-get($shadows-left, "md") (map-get($shadows-top, "md") * $shadows-top-multiple) shadow-blur(map-get($shadows-blur, "md") * $shadows-blur-multiple) rgba($color-black, map-get($shadows-color, "md")), shadow-blur(map-get($shadows-blur, "md"))),
+	"lg":  shadow-multiple(map-get($shadows-left, "lg") map-get($shadows-top, "lg") shadow-blur(map-get($shadows-blur, "lg")) rgba($color-black, map-get($shadows-color, "lg")), map-get($shadows-left, "lg") (map-get($shadows-top, "lg") * $shadows-top-multiple) shadow-blur(map-get($shadows-blur, "lg") * $shadows-blur-multiple) rgba($color-black, map-get($shadows-color, "lg")), shadow-blur(map-get($shadows-blur, "lg"))),
+	"xl":  shadow-multiple(map-get($shadows-left, "xl") map-get($shadows-top, "xl") shadow-blur(map-get($shadows-blur, "xl")) rgba($color-black, map-get($shadows-color, "xl")), map-get($shadows-left, "xl") (map-get($shadows-top, "xl") * $shadows-top-multiple) shadow-blur(map-get($shadows-blur, "xl") * $shadows-blur-multiple) rgba($color-black, map-get($shadows-color, "xl")), shadow-blur(map-get($shadows-blur, "xl"))),
+	"xxl": (shadow-multiple(map-get($shadows-left, "xl") map-get($shadows-top, "xl") shadow-blur(map-get($shadows-blur, "xl")) rgba($color-black, map-get($shadows-color, "xl")), map-get($shadows-left, "xl") (map-get($shadows-top, "xl") * $shadows-top-multiple) shadow-blur(map-get($shadows-blur, "xl") * $shadows-blur-multiple) rgba($color-black, map-get($shadows-color, "xl")), shadow-blur(map-get($shadows-blur, "xl"))), $overlay-bg-full)
+) !default;
+
+// Text shadow .sht-xxx
+$shadow-texts-left: (
+	"sm":  .05rem, "md":  .1rem, "lg":  .25rem
+) !default;
+$shadow-texts-top: (
+	"sm":  .1rem, "md":  .25rem, "lg":  .625rem
+) !default;
+$shadow-texts-blur: (
+	"sm":  .05rem, "md":  .15rem, "lg":  .625rem
+) !default;
+$shadow-texts-color: (
+	"sm":  .15, "md":  .2, "lg":  .25
+) !default;
+$shadow-texts: (
+	"0":   none,
+	"sm":  map-get($shadow-texts-left, "sm") map-get($shadow-texts-top, "sm") shadow-blur(map-get($shadow-texts-blur, "sm")) rgba($color-black, map-get($shadow-texts-color, "sm")),
+	"md":  map-get($shadow-texts-left, "md") map-get($shadow-texts-top, "md") shadow-blur(map-get($shadow-texts-blur, "md")) rgba($color-black, map-get($shadow-texts-color, "md")),
+	"lg":  map-get($shadow-texts-left, "lg") map-get($shadow-texts-top, "lg") shadow-blur(map-get($shadow-texts-blur, "lg")) rgba($color-black, map-get($shadow-texts-color, "lg"))
+) !default;
+
+// Transform .tra-  Rotate .tra-rox-xxx...
+$rotates: (
+	"1":   0deg, "2":   22.5deg, "3":   45deg, "4":   67.5deg, "5":   90deg,
+	"6":   102.5deg, "7":   135deg, "8":   157.5deg, "9":   180deg,
+	"10":  202.5deg, "11":  225deg, "12":  247.5deg, "13":  270deg, "14":  292.5deg, "15":  315deg
+) !default;
+
+// Scale .tra-scx-xxx, .tra-scy-xxx
+$scales: (
+	"0":    0, "10":   .1, "20":   .2, "40":   .4, "60":   .6, "80":   .8,
+	"90":   .9, "95":   .95, "100":  1, "105":  1.05, "110":  1.1, "120":  1.2,
+	"140":  1.4, "180":  1.8, "260":  2.6, "520":  5.2
+) !default;
+
+// Translate .tra-trx-xxx, .tra-try-xxx
+$translates: (
+	"1":   -300px, "2":   -200px, "3":   -150px, "4":   -100px, "5":   -80px,
+	"6":   -40px, "7":   -20px, "8":   -10px, "9":   -5px, "10":  -3px, "11":  0,
+	"12":  3px, "13":  5px, "14":  10px, "15":  20px, "16":  40px, "17":  80px,
+	"18":  100px, "19":  150px, "20":  200px, "21":  300px
+) !default;
+
+// Skew .tra-skx-xxx, .tra-sky-xxx
+$skews: (
+	"1":   -90deg, "2":   -70deg, "3":   -50deg, "4":   -30deg, "5":   -20deg,
+	"6":   -10deg, "7":   -5deg, "8":   0deg, "9":   5deg, "10":  10deg,
+	"11":  20deg, "12":  30deg, "13":  50deg, "14":  70deg, "15":  90deg
+) !default;
+
+// Origin .ori-x-xxx, .ori-y-xxx
+$origins-x: (
+	"l":  left, "c":  center, "r":  right
+) !default;
+$origins-y: (
+	"t":  top, "c":  center, "b":  bottom
+) !default;
+
+// Float .float-xxx (responsive)
+$float-sizes: (
+	'n':  none, 'l':  left, 'r':  right
+) !default;
+
+// Position .pos-xxx (responsive)
+$positions: (
+	's':    static, 'r':    relative, 'a':    absolute, 'f':    fixed, "sy":   sticky
+) !default;
+
+// Overflow .ovx-xxx, .ovy-xxx (responsive)
+$overflows: (
+	'v':  visible, 's':  scroll, 'a':  auto, 'h':  hidden
+) !default;
+
+// .caret
+$caret-opacity:  null !default;
+
+// hr - horizontal rule
+$hr-border-width:     map-get($border-sizes, "1") !default;
+$hr-border-width-lg:  map-get($border-sizes, "d") !default;
+$hr-border-style:     $border-style !default;
+$hr-margin-y:         map-get($spacers, "3") !default;
+
+// Effects duration
+$duration:          .25s !default;
+$duration-longer:   .5s !default;
+$duration-longest:  .75s !default;
+
+// .trans
+$transition-base:  all $duration ease-out !default;
+$transition-fade:  opacity $duration linear !default;
+
+// .collapse
+$collapse-btn-margin-bottom:  map-get($spacers, "5") !default;
+$collapse-transition:         height $duration ease-out !default;
+$collapse-icon-rotate:        $duration-longer !default;
+
+// .active
+$active:                map-get($designer-colors, $brand-active) !default;
+$active-inverse:        color-yiq($active) !default;
+$active-text-separate:  $active !default;
+
+// .active:before
+$active-label-size-x:  map-get($border-sizes, "d") + 2 !default;
+$active-label-size-y:  map-get($border-sizes, "d") + 3 !default;
+
+// Fonts
+$font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-icon:            'FontAwesome' !default;
+
+$font-families: (
+	"base": $font-family-base,
+	"adv":  $font-family-advanced
+) !default;
+
+// Show custom font from breakpoint
+$font-family-break:  sm !default;
+
+// Font size .fs-xxx (responsive)
+$font-size-base-max:  1.0789 !default;
+
+// em
+$font-sizes: (
+	"0":   0,
+	"1":   .815em,
+	"2":   .875em,
+	"3":   1em,
+	"4":   1.125em,
+	"5":   1.5em,
+	"6":   2em,
+	"7":   3em,
+	"8":   4em,
+	"9":   6em,
+	"10":  8em
+) !default;
+
+// Font elastic .fse-xxx
+$font-size-elastic-multiple:        .845 !default;
+$font-size-elastic-expand-elastic:  .25vw !default;
+
+// Font weight .fw-xxx
+$font-weight-bold:          font-weight-bold($font-weight-base) !default;
+$font-weight-heading-bold:  font-weight-bold($font-weight-heading-base) !default;
+
+$font-weights: (
+	"l":   300,
+	"r":   400,
+	"m":   500,
+	"b":   600,
+	"br":  800
+) !default;
+
+// Letter spacing .ls-xxx
+$letter-spacing-base:          0 !default;
+$letter-spacing-heading-base:  0 !default;
+
+$letter-spacing-sizes: (
+	"n7":  -.3em, "n6":  -.2em, "n5":  -.15em, "n4":  -.1em, "n3":  -.075em,
+	"n2":  -.05em, "n1":  -.025em, "0":   0, "1":   .025em, "2":   .05em,
+	"3":   .075em, "4":   .1em, "5":   .15em, "6":   .2em, "7":   .3em
+) !default;
+
+// Type p, ul, ol, small, abbr, address, dt, dd, sub, sup
+$paragraph-margin-bottom:    map-get($spacers, "3") !default;
+$ul-ol-align:                left !default;
+$small-font-size:            smaller !default;
+$small-font-weight:          map-get($font-weights, "r") !default;
+$small-letter-spacing:       map-get($letter-spacing-sizes, "0") !default;
+$abbr-text-decoration:       underline !default;
+$abbr-text-decoration-style: dotted !default;
+$abbr-decoration-thickness:  map-get($border-sizes, "d") !default;
+$abbr-cursor:                help !default;
+$address-font-style:         normal !default;
+$dt-font-weight:             $font-weight-base !default;
+$dd-margin-bottom:           .5rem !default;
+$sub-sup-font-size:          75% !default;
+$sub-bottom:                 -.25em !default;
+$sup-top:                    -.5rem !default;
+
+// Headings h1..h6, card-header ...
+$headings-line-height:          $line-height-heading !default;
+$headings-margin-bottom:        .65em !default;
+$headings-text-margin-top:      calc(#{$headings-margin-bottom} * 2 + .8vw) !default;
+$headings-text-margin-bottom:   calc(#{$headings-margin-bottom} + .8vw) !default;
+$headings-small-font-size:      65% !default;
+
+$hhg-font-size:                 2em * $scale-factor !default;
+$h1-font-size:                  1.5em * $scale-factor !default;
+$h2-font-size:                  1.3em * $scale-factor !default;
+$h3-font-size:                  1em * $scale-factor !default;
+$h4-font-size:                  .8em * $scale-factor !default;
+$h5-font-size:                  0.7585em * $scale-factor !default;
+$h6-font-size:                  0.69em * $scale-factor !default;
+
+$hhg-font-size-max:             3.5em * $scale-factor !default;
+$h1-font-size-max:              2.115em * $scale-factor !default;
+$h2-font-size-max:              1.471em * $scale-factor !default;
+$h3-font-size-max:              1.15em * $scale-factor !default;
+$h4-font-size-max:              0.9655em * $scale-factor !default;
+
+$hhg-font-size-grow:             1.5 !default;
+$h1-font-size-grow:              1.25 !default;
+$h2-font-size-grow:              1.15 !default;
+$h3-font-size-grow:              1.1 !default;
+$h4-font-size-grow:              1.1 !default;
+$h5-font-size-grow:              false !default;
+$h6-font-size-grow:              false !default;
+
+$hhg-line-height:               1 !default;
+$hhg-margin-bottom:             .3em !default;
+$h1-margin-bottom:              .4em !default;
+
+// Icons .ic
+$ic-size:                1em !default;
+$ic-size-sm:             .75em !default;
+$min-ic-size:            1.3em !default;
+
+// .ico-xxx
+$ico-font-size:      calc(#{$px} * 2 + .22vw) !default;
+$ico-border-radius:  border-radius-base($rounded: 'circle') !default;
+$ico-img-size:       map-get($sizes, "50") !default;
+
+$ico-font-sizes: (
+	"sm":  $font-size-base * strip-unit(map-get($font-sizes, "3")),
+	"md":  $font-size-base * strip-unit(map-get($font-sizes, "4")),
+	"lg":  $font-size-base * strip-unit(map-get($font-sizes, "5")),
+	"xl":  $font-size-base * strip-unit(map-get($font-sizes, "6"))
+) !default;
+
+$ico-sizes: (
+	"sm":  2.15em,
+	"md":  2.667em,
+	"lg":  2.667em,
+	"xl":  2.75em
+) !default;
+
+// .icon-text
+$icon-text-gap:              $space-ico !default;
+$icon-text-transition:       transform $duration ease-in-out !default;
+$icon-text-transform-top:    10% !default;
+$icon-text-transform-right:  .25em !default;
+
+// No item .no-item
+$no-item-font-size:  map-get($font-sizes, "6") !default;
+$no-item-padding-y:  map-get($spacers, "5") !default;
+$no-item-opacity:    .4 !default;
+$no-item-gap:        map-get($spacers, "3") !default;
+
+// Text decoration .td-xxx
+$text-decorations: (
+	"lt":  line-through,
+	"u":   underline,
+	"n":   none
+) !default;
+
+// Text transform .tt-xxx
+$text-transforms: (
+	"l":  lowercase,
+	"u":  uppercase,
+	"c":  capitalize
+) !default;
+
+// Heading line through .hlt
+$hlt-border-width:       map-get($border-sizes, "d") !default;
+$hlt-border-style:       $border-style !default;
+$hlt-gap:                map-get($spacers, "2") !default;
+$hlt-line-space-x:       map-get($spacers, "2") !default;
+
+// Printing
+$enable-print-styles:   true !default;
+$print-bg-color:        $color-white !default;
+$print-text-color:      $color-black !default;
+$print-border:          map-get($border-sizes, "d") solid desaturate($color-fg-primary-light, 100%) !default;
+$print-page-size:       a3 !default;
+$print-body-min-width:  map-get($grid-breakpoints, "lg") !default;
+$print-img-width:       360px !default;
+
+//
+// FORMS ****************************
+//
+
+$form-text-margin-top:      map-get($spacers, "1") !default;
+$form-align-spinner-xs:     center !default;
+$form-align-spinner:        $form-align-spinner-xs !default;
+$form-width-small-xs:       7em !default;
+$form-width-small-md:       5.5em !default;
+
+// label
+$label-space-bottom:  map-get($spacers, "3") / 2 !default;
+
+// Buttons + Forms shared
+$input-btn-padding-y:                     .75rem !default;
+$input-btn-padding-x:                     map-get($spacers, "4") !default;
+$input-btn-line-height:                   map-get($line-height-sizes, "sm") !default;
+$input-btn-focus-opacity:                 .5 !default;
+$input-btn-focus-width:                   .2rem !default;
+$input-btn-focus-color:                   rgba($active, $input-btn-focus-opacity) !default;
+$input-btn-focus-box-shadow:              0 0 0 $input-btn-focus-width $input-btn-focus-color !default;
+$input-btn-focus-box-shadow-alternative:  0 0 0 $input-btn-focus-width rgba($active-inverse, $input-btn-focus-opacity) !default;
+
+// Buttons .btn
+$btn-padding-y:            $input-btn-padding-y !default;
+$btn-padding-x:            $input-btn-padding-x !default;
+$btn-padding-xl-y:         map-get($spacers, "3") !default;
+$btn-padding-xl-x:         map-get($spacers, "5") !default;
+$btn-gap:                  $space-ico-lg !default;
+$btn-line-height:          $input-btn-line-height !default;
+$btn-font-weight:          map-get($font-weights, "r") !default;
+$btn-border-width:         map-get($border-sizes, "d") !default;
+$btn-border-style:         $border-style !default;
+$btn-focus-box-shadow:     0 0 0 $input-btn-focus-width $input-btn-focus-color !default;
+$btn-disabled-opacity:     $disabled-opacity !default;
+$btn-border-radius:        border-radius-base() !default;
+$btn-hover-bg-darken:      $lightness-level !default;
+$btn-active-shadow:        none !default;
+$btn-transition:           $transition-base !default;
+
+// Button group
+$btn-group-border-radius-reset:  0 !default;
+
+// .btn-max
+$btn-block-width-xs:  100% !default;
+$btn-block-width:     90% !default;
+$btn-max-width:       19em !default;
+
+// Button preloader
+$btn-preloader-animation:  ic-spin 2s infinite linear !default;
+$btn-preloader-cursor:     not-allowed !default;
+
+$colors-button: (
+	"pr":   map-get($colors-fg, "pr"),
+	"se":   map-get($colors-fg, "se"),
+	"co":   map-get($colors-fg, "co"),
+	"de":   map-get($colors-bg, "de"),
+	"des":  map-get($colors-bg, "des"),
+	"dec":  map-get($colors-bg, "dec"),
+	"gr":   map-get($colors-fg-complete, "gr"),
+	"ye":   map-get($colors-fg-complete, "ye"),
+	"re":   map-get($colors-fg-complete, "re"),
+	"cy":   map-get($colors-fg-complete, "cy"),
+	"bl":   map-get($colors-fg-complete, "bl"),
+	"wh":   map-get($colors-fg-complete, "wh")
+) !default;
+
+$colors-button-text-separate: (
+	"pr":   $color-fg-primary,
+	"se":   $color-fg-secondary,
+	"co":   $color-fg-conversion,
+	"gr":   null,
+	"ye":   null,
+	"re":   null,
+	"cy":   null,
+	"bl":   $color-black,
+	"wh":   $color-white
+) !default;
+
+// Inputs .form-control
+$input-bg:                    $color-default !default;
+$input-color:                 $body-color !default;
+$input-padding-y:             $input-btn-padding-y !default;
+$input-padding-x:             map-get($spacers, "3") !default;
+$input-font-size:             map-get($font-sizes, "3") !default;
+$input-font-size-sm:          map-get($font-sizes, "2") !default;
+$input-height:                calc(#{$input-font-size} * #{$input-btn-line-height} + #{$input-btn-padding-y} * 2) !default;
+$input-height-sm:             calc(#{$input-font-size-sm} * #{$input-btn-line-height} + #{$input-btn-padding-y}) !default;
+$input-line-height:           $input-btn-line-height !default;
+$input-border-width:          0 !default;
+$input-border-style:          $border-style !default;
+$input-border-radius:         border-radius-base() !default;
+$input-min-width:             235px !default;
+$input-placeholder-lighten:   .5 !default;
+$input-disabled-style:        italic !default;
+$input-disabled-cursor:       not-allowed !default;
+$input-disabled-opacity:      $disabled-opacity !default;
+$input-transition:            border-color .15s ease-in-out, box-shadow .15s ease-in-out, background-color $duration ease-in-out !default;
+$input-focus-width:           $input-btn-focus-width !default;
+$input-focus-box-shadow:      0 0 0 $input-focus-width $input-btn-focus-color !default;
+
+// .input-icon
+$input-icon-size:             1em !default;
+$input-icon-margin-right:     $input-btn-padding-x !default;
+
+// .col-form-label
+$col-form-label-line-height:           map-get($line-height-sizes, "sm") !default;
+$col-form-label-padding-top:           $input-padding-y * 1.2 !default;
+$col-form-checkbox-label-padding-top:  .1rem !default;
+$col-form-label-align-base:            right !default;
+
+// Input group .input-group
+$input-group-line-height:           $input-line-height !default;
+$input-group-right-overlap:         2.5em !default;
+$input-group-right-overlap-back:    -$input-group-right-overlap !default;
+$input-group-padding-y:             $input-padding-y !default;
+$input-group-padding-x:             $input-padding-x !default;
+$input-group-append-padding-right:  $input-group-right-overlap !default;
+$input-group-prepend-padding-left:  $input-padding-x + 1.8rem !default;
+
+// File input .custom-file-input
+$custom-file-padding-right:  7rem !default;
+$custom-file-cursor:         default !default;
+
+// Selects
+$select-bg-size:            0.9em 0.7em !default;
+$select-padding-right:      $select-indicator-right * 2.5 !default;
+$select-option-color:       rgba(map-get($colors-text, "wh"), .4) !default;
+$select-cursor:             default !default;
+
+// Textarea
+$textarea-height:         auto !default;
+$textarea-border-radius:  border-radius-base($rounded: 'max') !default;
+
+// Spinner .ui-spinner
+$spinner-btn-width:      2em !default;
+$spinner-btn-cursor:     pointer !default;
+$spinner-btn-padding-x:  $spinner-btn-width / 3 !default;
+
+// Checkboxes and radios .custom-control
+$checkbox-radio-line-height:                map-get($line-height-sizes, "sm") !default;
+$checkbox-radio-border-width:               2px !default;
+$checkbox-radio-border-style:               solid !default;
+$checkbox-radio-indicator-size:             16px !default;
+$checkbox-radio-indicator-min-height:       1.1em !default;
+$checkbox-radio-indicator-gutter:           $checkbox-radio-indicator-size * 1.5 !default;
+$checkbox-radio-indicator-gutter-sm:        $checkbox-radio-indicator-size * 1.35 !default;
+$checkbox-radio-indicator-unchecked-color:  .5 !default;
+$checkbox-radio-indicator-border:             rgba(map-get($colors-text, "wh"), .3) !default;
+$checkbox-radio-indicator-border-primary:     rgba(map-get($colors-text, "pr"), $checkbox-radio-indicator-unchecked-color) !default;
+$checkbox-radio-indicator-border-secondary:   rgba(map-get($colors-text, "se"), $checkbox-radio-indicator-unchecked-color) !default;
+$checkbox-radio-indicator-border-conversion:  rgba(map-get($colors-text, "co"), $checkbox-radio-indicator-unchecked-color) !default;
+$checkbox-radio-indicator-bg-inverse:         $color-white !default;
+$checkbox-radio-indicator-bg-size:            50% 50% !default;
+$checkbox-radio-indicator-focus-shadow:       0 0 0 1px $color-default, $input-btn-focus-box-shadow !default;
+$checkbox-radio-indicator-transition:         background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
+$checkbox-radio-indicator-checked-color:          $color-white !default;
+$checkbox-radio-indicator-checked-bg-primary:     $color-fg-primary !default;
+$checkbox-radio-indicator-checked-bg-secondary:   $color-fg-secondary !default;
+$checkbox-radio-indicator-checked-bg-conversion:  $color-fg-conversion !default;
+$checkbox-indicator-border-radius:       border-radius-base($radius: map-get($radius-sizes, "1"), $rounded: false) !default;
+$checkbox-indicator-checked:             url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='#{$checkbox-radio-indicator-checked-color}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E") !default;
+$radio-indicator-border-radius:            50% !default;
+
+// Form validation .has-xxx
+$form-feedback-required-color:  $color-required !default;
+$form-feedback-success-color:   $color-success !default;
+$form-feedback-danger-color:    $color-danger !default;
+$form-feedback-weight:          600 !default;
+
+$form-colors-bg: (
+	"pr": ( bg: designer-value($form-control-pr-designer, $color-bg-primary-dark), color: false ),
+	"se": ( bg: designer-value($form-control-se-designer, $color-bg-secondary-dark), color: false ),
+	"co": ( bg: designer-value($form-control-co-designer, $color-bg-conversion-dark), color: false ),
+	"de": ( bg: $color-white, color: false ),
+	"des": ( bg: $color-white, color: map-get($colors-text-separate, "se") ),
+	"dec": ( bg: $color-white, color: map-get($colors-text-separate, "co") )
+) !default;
+
+//
+// MODULES ****************************
+//
+
+// List group .list-group
+$list-group-color:                 inherit !default;
+$list-group-border-radius:         border-radius-base($rounded: false) !default;
+$list-group-border-width:          map-get($border-sizes, "1") !default;
+$list-group-border-style:          $border-style !default;
+$list-group-heading-font-weight:   $font-weight-bold !default;
+$list-group-heading-line-height:   map-get($line-height-sizes, "md") !default;
+$list-group-font-size-sm:          map-get($font-sizes, "2") !default;
+$list-group-horizontal-align:      $text-align-base !default;
+
+// .lgi
+$list-group-item-padding-y:             map-get($spacers, "2") !default;
+$list-group-item-padding-x:             map-get($spacers, "4") !default;
+$list-group-item-padding-active-left:   $list-group-item-padding-x !default;
+$list-group-item-padding-active-right:  $list-group-item-padding-x !default;
+$list-group-item-toggle-right:          2.5em !default;
+$list-group-item-arrow-top:             -20% !default;
+$list-group-item-text-font-weight:      $font-weight-base !default;
+$list-group-item-active-weight:    $font-weight-bold !default;
+$list-group-item-open-weight:      $font-weight-bold !default;
+
+$list-group-colors-bg-hover: (
+	"pr":   $color-bg-primary-dark,
+	"se":   $color-bg-secondary-dark,
+	"co":   $color-bg-conversion-dark,
+	"de":   $color-default-dark,
+	"des":  $color-default-s-dark,
+	"dec":  $color-default-c-dark,
+	"wh":   $color-default-light
+) !default;
+
+// Navs .nav / .nav-tabs
+$nav-tabs-padding-y:            map-get($spacers, "4") !default;
+$nav-tabs-padding-x:            map-get($spacers, "4") !default;
+$nav-tabs-border-width:         map-get($border-sizes, "d") !default;
+$nav-tabs-border-radius:        border-radius-base($rounded: false) !default;
+$nav-tabs-weight:               $font-weight-bold !default;
+$nav-tabs-padding:              map-get($spacers, "3") !default;
+$nav-tabs-padding-md:           0 !default;
+$nav-tabs-gap:                  $space-ico-lg !default;
+$nav-item-margin-bottom-md:     -$nav-tabs-border-width !default;
+$nav-link-color:                inherit !default;
+$nav-link-bg-hover:             $link-hover-bg !default;
+$nav-link-primary-bg-hover:     $link-hover-bg-dark !default;
+$nav-link-padding-y:            map-get($spacers, "2") !default;
+$nav-link-padding-x:            map-get($spacers, "2") !default;
+$nav-link-padding-x-lg:         calc(#{$nav-link-padding-x} + .1vw) !default;
+$nav-link-line-height:          map-get($line-height-sizes, "lg") !default;
+$nav-link-gap:                  $space-ico !default;
+$nav-link-gap-lg:               $space-ico-lg !default;
+$nav-link-active-min-width:     null !default;
+$nav-link-active-padding-x-sm:  map-get($spacers, "4") !default;
+$nav-link-disabled-cursor:      not-allowed !default;
+$nav-link-disabled-opacity:     $disabled-opacity !default;
+
+// Navbar .navbar
+$navbar-padding-y:                    $list-group-item-padding-y !default;
+$navbar-padding-y-xs:                 map-get($spacers, "1") !default;
+$navbar-padding-x:                    $list-group-item-padding-x !default;
+$navbar-shadow:                       map-get($shadows, "lg") !default;
+$navbar-bg-hover:                     $link-hover-bg !default;
+$navbar-height-sm:                    2.867rem !default;
+$navbar-height:                       3.6rem !default;
+$navbar-height-lg:                    5.33334rem !default;
+$navbar-toggler-color:                inherit !default;
+$navbar-toggler-padding-y:            map-get($spacers, "2") !default;
+$navbar-toggler-padding-x:            map-get($spacers, "3") !default;
+$navbar-toggler-padding-x-xs:         map-get($spacers, "2") !default;
+$navbar-toggler-gap:                  $space-ico !default;
+$navbar-toggler-border-radius:        border-radius-base($rounded: false) !default;
+
+// Alerts .alert
+$alert-padding-y:           map-get($spacers, "4") !default;
+$alert-padding-x:           $alert-padding-y !default;
+$alert-border-radius:       border-radius-base($rounded: false) !default;
+$alert-link-font-weight:    map-get($font-weights, "b") !default;
+$alert-link-color:          inherit !default;
+$alert-paragraph-space:     $paragraph-margin-bottom !default;
+$alert-bg-level:            -10 !default;
+$alert-border-level:        -8 !default;
+$alert-color-level:         6 !default;
+$alert-color-darken:        5% !default;
+$alert-text-muted-lighten:  40% !default;
+$alert-colors: (
+	"gr":  $color-success,
+	"re":  $color-danger,
+	"ye":  $color-warning,
+	"cy":  $color-info
+) !default;
+
+// Badges .badge
+$badge-font-family:              $font-family-base !default;
+$badge-font-size:                map-get($font-sizes, "2") !default;
+$badge-font-weight:              map-get($font-weights, "r") !default;
+$badge-line-height:              map-get($line-height-sizes, "xs") !default;
+$badge-letter-spacing:           $letter-spacing-base !default;
+$badge-padding-y:                map-get($spacers, "1") !default;
+$badge-padding-x:                map-get($spacers, "2") !default;
+$badge-gap:                      $space-ico !default;
+$badge-min-width:                2em !default;
+$badge-border-radius:            border-radius-base() !default;
+$badge-sticker-size:             1.95em !default;
+$badge-sticker-padding-y:        0 !default;
+$badge-sticker-padding-x:        .3em !default;
+$badge-sticker-top:              -19% !default;
+$badge-sticker-right:            -1em !default;
+$badge-dot-size:                 .6rem !default;
+$badge-dot-border-radius:        border-radius-base($rounded: 'circle') !default;
+
+// Cards .card
+$card-padding-y:                  map-get($spacers, "4") !default;
+$card-padding-x:                  map-get($spacers, "4") !default;
+$card-border-width:               map-get($border-sizes, "d") !default;
+$card-border-radius:              border-radius-base($rounded: false) !default;
+$card-header-font-size:           map-get($font-sizes, "4") !default;
+$card-header-weight:              $font-weight-heading-bold !default;
+$card-header-spacer-y:            map-get($spacers, "3") !default;
+$card-header-line-height:         map-get($line-height-sizes, "xs") !default;
+$card-header-padding-top-uni:     0 !default;
+$card-header-padding-x-uni:       $card-padding-x !default;
+$card-header-padding-bottom-uni:  map-get($spacers, "2") !default;
+$card-body-padding-top-uni:       map-get($spacers, "3") !default;
+$card-body-padding-bottom-uni:    0 !default;
+$card-item-deck-margin:           map-get($spacers, "3") / 2 !default;
+$card-item-deck-margin-xs:        $card-item-deck-margin / 2 !default;
+$card-group-deck-margin:          -$card-item-deck-margin !default;
+$card-item-border-margin:         -$card-border-width !default;
+$card-columns-gap:                map-get($spacers, "5") !default;
+
+// Accordion .accordion
+$accordion-border-width:  map-get($border-sizes, "1") !default;
+$accordion-border-style:  $border-style !default;
+
+// Tile .tile
+$tile-cursor:                pointer !default;
+$tile-horizontal-img-size:   50px !default;
+
+// Carousel .carousel
+$carousel-image-radius:        border-radius-base($rounded: false) !default;
+$carousel-ico-bottom:          map-get($spacers, "4") !default;
+$carousel-nav-size:            map-get($ico-sizes, "md") !default;
+$carousel-nav-top:             50% !default;
+$carousel-nav-translate-y:     -50% !default;
+$carousel-nav-font-size:       1.4em !default;
+$carousel-nav-margin-x:        map-get($spacers, "4") !default;
+$carousel-nav-overlap-x:       3rem !default;
+$carousel-nav-cont-overlap-x:  5rem !default;
+$carousel-nav-opacity:         .4 !default;
+$carousel-nav-opacity-hover:   1 !default;
+$carousel-dot-container-size:  2.5em !default;
+$carousel-dot-size:            1em !default;
+$carousel-dot-bg:              $color-white !default;
+$carousel-dot-inverse-bg:      $color-text-primary !default;
+$carousel-dot-border-radius:   border-radius-base($rounded: 'circle') !default;
+$carousel-dot-overlap:	       ($carousel-dot-container-size - $carousel-dot-size) / 2 !default;
+$carousel-dot-opacity:         $carousel-nav-opacity !default;
+$carousel-dot-opacity-hover:   .6 !default;
+$carousel-dot-opacity-active:  1 !default;
+$carousel-indicators-size:     map-get($font-sizes, "1") !default;
+$carousel-indicators-gap:      $carousel-dot-overlap * 2 !default;
+
+// Cover .cover
+$cover-border-radius: $carousel-image-radius !default;
+
+// Dropdowns .dropdown-menu
+$dropdown-top:                       16px !default;
+$dropdown-width:                     13.5rem !default;
+$dropdown-width-lg:                  20rem !default;
+$dropdown-font-size:                 $font-size-base !default;
+$dropdown-font-weight:               map-get($font-weights, "r") !default;
+$dropdown-border-radius:             border-radius-base($rounded: false) !default;
+$dropdown-align:                     left !default;
+$dropdown-line-height:               map-get($line-height-sizes, "sm") !default;
+$dropdown-box-shadow:                map-get($shadows, "lg") !default;
+$dropdown-animation:                 anim-dropdown $duration ease-out !default;
+$dropdown-text-opacity:              .5 !default;
+$dropdown-toggle-split-padding-x:    map-get($spacers, "3") !default;
+$dropdown-toggle-split-border-left:  $btn-border-width !default;
+$dropdown-toggle-split-outer-left:   -$outer-size !default;
+$dropdown-max-height:                75vh !default;
+$dropdown-arrow-size:                $dropdown-top / 2 !default;
+$dropdown-arrow-right:               1em !default;
+$dropdown-link-gap:                  $space-ico-lg !default;
+$dropdown-link-padding-x:            map-get($spacers, "3") !default;
+$dropdown-link-padding-y:            0.46667em !default;
+$dropdown-link-padding-y-outer:      $dropdown-link-padding-y * 2 !default;
+$dropdown-link-border-color:         map-get($border-colors-default, "wh") !default;
+$dropdown-link-justify-content:      flex-start !default;
+$dropdown-link-align-items:          center !default;
+$dropdown-link-hover-bg:             $link-hover-bg !default;
+$dropdown-link-active-bg:            $active !default;
+$dropdown-link-img-shadow:           none !default;
+
+$alignments: (
+	"l": left, "c": center, "r": right, "j": justify, "s": flex-start,
+	"e": flex-end, "bs": baseline, "sch": stretch, "b": space-between,
+	"a": space-around, "ev": space-evenly
+) !default;
+
+$flex-directions: (
+	"row": row, "col": column, "row-rev": row-reverse, "column-rev": column-reverse
+) !default;
+
+$flex-wraps: (
+	"wrap": wrap, "nowrap": nowrap, "wrap-rev": wrap-reverse
+) !default;
+
+// Image img
+$img-sm-size:                  60px !default;
+$img-nopicture-width:          5em !default;
+$img-nopicture-opacity:        .1 !default;
+$img-nopicture-bg:             none !default;
+$img-nopicture-shadow:         none !default;
+
+// Image thumbnails .img-thumbnail
+$thumbnail-bg:                 $body-bg !default;
+$thumbnail-border-radius:      border-radius-base($rounded: false) !default;
+$thumbnail-sm-border-radius:   border-radius-base($rounded: 'circle') !default;
+$thumbnail-active-shadow:      0 0 0 $input-btn-focus-width $active !default;
+$thumbnail-caption-font-size:  map-get($font-sizes, "2") !default;
+$thumbnail-caption-padding-y:  map-get($spacers, "2") !default;
+$thumbnail-caption-padding-x:  map-get($spacers, "3") !default;
+$thumbnail-caption-radius:     $thumbnail-border-radius !default;
+
+// Video video
+$video-bg: rgba($color-black, .35) !default;
+
+// Lightbox
+$lightbox-bg:                               #171717 !default;
+$lightbox-bg-opacity:                       .96 !default;
+$lightbox-content-title-space-b:            3rem !default;
+$lightbox-content-title-space-b-landscape:  5.3rem !default;
+$lightbox-thumb-landscape-width:            20% !default;
+$lightbox-thumb-portrait-height:            10.25em !default;
+$lightbox-thumb-img-bg:                     $thumbnail-bg !default;
+$lightbox-thumb-img-height:                 8vw !default;
+$lightbox-thumb-img-height-sm:              5em !default;
+$lightbox-thumb-img-space:                  map-get($spacers, "4") !default;
+
+// Media .media
+$media-align:                 left !default;
+$media-margin-top:            map-get($spacers, "3") !default;
+$media-indent-size:           map-get($spacers, "3") !default;
+$media-indent-border-width:   map-get($border-sizes, "d") + 1 !default;
+$media-indent-border-style:   $border-style !default;
+$media-indent-border-radius:  border-radius-base($rounded: 'max') !default;
+$media-indent-margin-x:       map-get($spacers, "2") !default;
+
+// Modals .modal
+$modal-backdrop-bg:         $color-black !default;
+$modal-backdrop-opacity:    .3 !default;
+$modal-dialog-width:                  600px !default;
+$modal-dialog-width-lg:               900px !default;
+$modal-dialog-width-sm:               400px !default;
+$modal-dialog-font-size:              false !default;
+$modal-dialog-margin:                 map-get($spacers, "3") !default;
+$modal-dialog-margin-y:               map-get($spacers, "3") * 2 !default;
+$modal-dialog-margin-y-sm:            map-get($spacers, "5") !default;
+$modal-dialog-close-out-margin-block: $cross-size-container * 1.5 !default;
+$modal-dialog-close-out-min-height:   calc(100% - (#{$modal-dialog-close-out-margin-block} * 2)) !default;
+$modal-dialog-close-out-transform:    translate(0, -110%) !default;
+$modal-font-size:           map-get($font-sizes, "3") !default;
+$modal-padding-y:           map-get($spacers, "4") !default;
+$modal-padding-x:           map-get($spacers, "4") !default;
+$modal-border-radius:       border-radius-base($rounded: false) !default;
+$modal-box-shadow:          map-get($shadows, "xl") !default;
+$modal-header-gap-x:        map-get($spacers, "3") !default;
+$modal-header-padding-y:    map-get($spacers, "3") !default;
+$modal-title-line-height:   map-get($line-height-sizes, "xs") !default;
+
+// Pagination .page-link
+$pagination-padding-x:     .5rem !default;
+$pagination-padding-x-xs:  map-get($font-sizes, "3") !default;
+
+// Popovers .popover
+$popover-font-size:      1em !default;
+$popover-top:            -0.75em !default;
+$popover-max-width:      20em !default;
+$popover-border-radius:  border-radius-base($rounded: false) !default;
+$popover-box-shadow:     map-get($shadows, "lg") !default;
+$popover-padding-y:      .7em !default;
+$popover-padding-x:      .8rem !default;
+$popover-arrow-width:    1em !default;
+$popover-arrow-height:   .5em !default;
+
+// Progress bars .progress
+$progress-height:         map-get($spacers, "1") !default;
+$progress-border-radius:  border-radius-base() !default;
+
+// Tables .table
+$table-border-width:                  map-get($border-sizes, "1") !default;
+$table-border-style:                  $border-style !default;
+$table-border-top:                    0 !default;
+$table-th-border-width:               $table-border-width + 1 !default;
+$table-cell-padding-y:                map-get($spacers, "2") !default;
+$table-cell-padding-y-big:            map-get($spacers, "3") !default;
+$table-cell-padding-x:                map-get($spacers, "4") !default;
+$table-cell-vertical-align:           middle !default;
+$table-sm-cell-padding-y:             map-get($spacers, "1") !default;
+$table-sm-cell-padding-x:             .25rem !default;
+
+$table-elastic-row-gap-md:            .3em !default;
+$table-elastic-tr-padding-y-md:       1em !default;
+$table-elastic-label-align-md:        right !default;
+$table-elastic-label-width-md:        35% !default;
+$table-elastic-label-width-xs:        30% !default;
+$table-elastic-label-main-weight-md:  map-get($font-weights, "b") !default;
+$table-elastic-label-font-size-md:    smaller !default;
+$table-elastic-label-color:           $text-muted-color-base !default;
+$table-elastic-label-weight-md:       normal !default;
+$table-elastic-label-style-xs:        italic !default;
+$table-elastic-label-right-md:        map-get($spacers, "4") !default;
+$table-elastic-label-right-xs:        map-get($spacers, "3") !default;
+$table-elastic-addon-gap-md:          .15em !default;
+$table-elastic-heading-bottom-md:     .5rem !default;
+$table-elastic-heading-left-md:       0 !default;
+$table-elastic-heading-align-md:      left !default;
+$table-elastic-delete-top-md:         $table-elastic-tr-padding-y-md - .3em !default;
+$table-elastic-delete-right-md:       -.5em !default;
+
+// Tooltips .tooltip
+$tooltip-font-size:      map-get($font-sizes, "2") !default;
+$tooltip-max-width:      18em !default;
+$tooltip-border-radius:  border-radius-base($rounded: false) !default;
+$tooltip-opacity:        1 !default;
+$tooltip-margin:         .5em !default;
+$tooltip-padding:        map-get($spacers, "3") !default;
+$tooltip-align:          center !default;
+$tooltip-box-shadow:     map-get($shadows, "lg") !default;
+$tooltip-arrow-width:    map-get($spacers, "3") !default;
+$tooltip-arrow-height:   map-get($spacers, "3") / 2 !default;
+$tooltip-arrow-color:    $tooltip-bg !default;
+$tooltip-arrow-left:     50% !default;
+
+// Typehead .tt-menu
+$typehead-height:                18rem !default;
+$typehead-max-height:            72vh !default;
+$typehead-max-height-sm:         60vh !default;
+
+//
+// Templates ****************************
+//
+
+// Header .header
+$header-alert-height:                    2.93rem !default;
+$header-alert-z-index:                   15 !default;
+$header-navbar-dropdown-1-top:           100% !default;
+$header-column-search-uni-space-bottom:  4.77rem !default;
+$header-logo-max-width:                  400px !default;
+$header-item-badge-right:                .75em !default;
+$header-z-index:                         14 !default;
+$header-logo-font-size-md:           calc(#{$navbar-height} - #{map-get($spacers, "2")}) !default;
+$header-logo-font-size-sm:           calc(#{$navbar-height-sm} - #{map-get($spacers, "2")}) !default;
+$header-logo-font-size-sm-longtext:  calc(#{$navbar-height-sm} - #{map-get($spacers, "4")}) !default;
+$header-logo-font-size:              4.2em !default;
+$header-logo-top:                    .1em !default;
+
+// Products list .p-i
+$products-list-img-height:             242px !default;
+$products-list-img-height-cols:        239px !default;
+$products-list2-img-height:            230px !default;
+$products-list2-img-height-cols:       227px !default;
+
+// Navbar heights
+$main-z-index:                     12 !default;
+
+//
+// Theme ****************************
+//
+$theme-texture-opacity-white:       .08 !default;
+$theme-texture-opacity-default:     .6 !default;
+$theme-texture-opacity-primary:     .08 !default;
+$theme-texture-opacity-secondary:   .14 !default;
+$theme-texture-opacity-conversion:  .14 !default;

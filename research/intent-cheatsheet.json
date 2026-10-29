@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "source": "design-intent cheat sheet built from upgates-variables-reference.md",
+    "how_to_read": {
+      "slot": "change this in the custom-variables SCSS slot (system-wide)",
+      "admin": "change in the Designer admin UI (brand/color system) — NOT the slot",
+      "override": "no variable covers this — write an @layer override rule by hand",
+      "partial": "some parts yes (see notes), other parts need custom"
+    }
+  },
+  "intents": [
+    { "intent": "button background color", "path": "admin", "notes": "$colors-button -> Designer color panel. Hover color via $btn-hover-bg-darken (slot, % darken) or hand-override." },
+    { "intent": "button hover state (darken amount)", "path": "slot", "var": "btn-hover-bg-darken", "notes": "$lightness-level %. Set darker/lighter directly." },
+    { "intent": "button padding", "path": "slot", "var": "btn-padding-y / btn-padding-x / btn-padding-xl-*" },
+    { "intent": "button radius", "path": "slot", "var": "btn-border-radius", "notes": "derived from border-radius-base(); often you must override radius-sizes or hand-CSS." },
+    { "intent": "button font weight/size", "path": "slot", "var": "btn-font-weight / font-sizes" },
+    { "intent": "button focus ring (width/opacity)", "path": "slot", "var": "input-btn-focus-width / input-btn-focus-opacity" },
+    { "intent": "button transition/animation", "path": "slot", "var": "btn-transition / btn-preloader-*" },
+    { "intent": "button text color", "path": "admin", "notes": "$colors-button-text-separate -> Designer." },
+    { "intent": "link hover (underline)", "path": "slot", "var": "link-hover-decoration / link-text-hover-decoration" },
+    { "intent": "link hover background tint", "path": "admin", "var": "link-hover-bg", "notes": "color system -> Designer." },
+    { "intent": "nav dropdown hover bg", "path": "admin", "var": "dropdown-link-hover-bg / nav-link-bg-hover / navbar-bg-hover", "notes": "all flow from $link-hover-bg -> Designer." },
+    { "intent": "heading sizes (H1-H6)", "path": "slot", "var": "hhg-font-size / h1-font-size / h2-font-size ...", "notes": "multiply $scale-factor; max sizes via *-max; growth via *-grow." },
+    { "intent": "body/global font size", "path": "slot", "var": "font-size-base / font-size-base-max", "notes": "elastic factor via font-size-elastic-*." },
+    { "intent": "global font family", "path": "slot", "var": "font-families / brand or admin", "notes": "$font-family-base likely admin; see font-family-base." },
+    { "intent": "spacing/whitespace rhythm", "path": "slot", "var": "spacers", "notes": "the whole 0-7 scale. Also gaps/gutters mirror it." },
+    { "intent": "page container max width", "path": "slot", "var": "container-xs/sm/md/lg/xl/xxl" },
+    { "intent": "grid gutters", "path": "slot", "var": "gutters / grid-gutter-width", "notes": "gutters=$spacers by default." },
+    { "intent": "navbar height", "path": "slot", "var": "navbar-height / navbar-height-sm / navbar-height-lg" },
+    { "intent": "product card image height", "path": "slot", "var": "products-list-img-height / products-list2-img-height", "notes": "fixed px; per-layout vars." },
+    { "intent": "card padding & radius", "path": "slot", "var": "card-padding-x / card-padding-y / card-border-radius" },
+    { "intent": "alert / status colors (success, danger, warning, info)", "path": "admin", "var": "colors", "notes": "Designer panel (upech/nebezpeci/upozorneni/info)." },
+    { "intent": "badge (cart count) look", "path": "slot", "var": "badge-* (font-size, padding, min-width, radius)" },
+    { "intent": "input field height/padding", "path": "slot", "var": "input-padding-y / input-padding-x / input-height" },
+    { "intent": "input field background/color", "path": "admin", "var": "input-bg / input-color", "notes": "derive from color system -> Designer." },
+    { "intent": "modal width", "path": "slot", "var": "modal-dialog-width / modal-dialog-width-lg / -sm" },
+    { "intent": "dropdown menu width", "path": "slot", "var": "dropdown-width / dropdown-width-lg" },
+    { "intent": "shadow depth", "path": "slot", "var": "shadows (0/sm/md/lg/xl/xxl)" },
+    { "intent": "border radius scale", "path": "slot", "var": "radius-sizes (0/1/2/3/4)", "notes": "controls .ra-* utilities." },
+    { "intent": "carousel arrows/dots opacity", "path": "slot", "var": "carousel-nav-opacity / carousel-dot-opacity(-hover)" },
+    { "intent": "table cell padding", "path": "slot", "var": "table-cell-padding-y / -x" },
+    { "intent": "tooltip styling", "path": "partial", "var": "tooltip-* (padding, radius) / tooltip-bg-color", "notes": "shape via slot; bg/text color via Designer." },
+    { "intent": "text selection color / focus color / active colors", "path": "admin", "var": "active / input-btn-focus-color", "notes": "brand-derived -> Designer." }
+  ]
+}

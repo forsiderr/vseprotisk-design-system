@@ -1,57 +1,33 @@
-# Všeprotisk Design System — Upgates custom-variables pipeline
+# Všeprotisk design system — Upgates override layer
 
-Design-token overlay for Upgates' SCSS build. Maps one source of truth
-(Figma → `tokens/design-tokens.json`) onto Upgates' `!default` variables so
-the theme compiles with **your** values — no per-component CSS fighting.
+Pixel-perfect storefront redesign on Upgates, powered by **Penpot** designs and a
+**single-owner external override layer**. See `docs/architecture.md` for the full
+strategy and `research/` for the theme-analysis tooling.
 
-## Why this works
+## What this is
 
-Upgates provides a **custom-variables SCSS slot** that compiles BEFORE the
-theme partials. Nearly every theme variable is `!default`, so anything you set
-in that slot wins. This file lives in the slot. It emits token *values* into
-Upgates' variable maps (`$spacers`, `$font-sizes`, `$radius-sizes`, `$shadows`,
-`$colors-bg`, …); the platform's build factory then reproduces every component
-from them as literals.
+A system where the whole design system is built as an **external SCSS/CSS override
+layer** (`@layer override`), decoupled from Upgates' variable/Designer quirks.
+One owner, one pipeline: Penpot → override CSS → staging audit → live.
 
-Verified against `vseprotisk.t2.upgates.shop` theme output (see
-`docs/architecture.md`).
+**Useful current artifacts:**
+- `research/upgates-intent-cheatsheet.md` / `.html` — the "can I change X via
+  slot variable or must I hand-override?" design-intent map (32 intents).
+- `research/map_variables.py` — parse a raw `_variables.scss` dump into a
+  per-variable reference (slot vs admin). Re-run on new themes.
+- `tokens/design-tokens.json` — the `--vsp-*` token source (fill from Penpot).
 
-## The critical lever (confirm yours)
+## The guiding rule
 
-If the custom-variables slot compiles with the theme, this entire system works.
-Sanity test once:
-
-```scss
-$colors-bg: ( "pr": #ff0000 ) !default;
-```
-
-Save in the slot, load homepage. A `.bg-pr` element turning red = levers on.
-
-## Workflow
-
-```
-Figma (design)  →  tokens/design-tokens.json  →  dist/_variables.scss  →  Upgates slot
-```
-
-1. Edit `tokens/design-tokens.json` only. Never hand-edit `dist/_variables.scss`.
-2. Rebuild: `python3 build/generate.py`
-3. Paste `dist/_variables.scss` into the Upgates custom-variables SCSS slot.
-4. Save / recompile in Designer. Verify on a staging shop first.
+> Try the variable/setting first; only hand-override when no variable exists.
+> And because variables are entangled with Designer state we can't own, the
+> override layer is the *primary* pointer for anything we want full control over.
 
 ## Layout
 
 ```
-tokens/design-tokens.json   source of truth (colors, spacing, type, radius, shadow)
-build/generate.py           token -> Upgates-variable generator
-dist/_variables.scss        GENERATED, paste into Upgates slot
-docs/architecture.md        verified Upgates SCSS architecture & limits
+.hermes.md                  project context — auto-loaded in this repo
+docs/architecture.md        settled strategy (v2)
+research/                   live-theme analysis + cheat sheets
+tokens/design-tokens.json   --vsp-* token source (Penpot home)
 ```
-
-## Conventions
-
-- Generation uses a 4px grid, fixed px type scale, and explicit color maps —
-  the three things Upgates' defaults do worst (see docs/architecture.md).
-- Keep Designer admin as the blessed surface for what you don't override.
-- Tier-3 residual overrides (token-ignoring components, JS-hardcoded SVG fills)
-  stay in a separate `custom.scss` / head-injected stylesheet — never in the
-  generated variables file.
